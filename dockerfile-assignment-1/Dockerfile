@@ -4,15 +4,21 @@
 
 FROM node:6-alpine
 
+# Install tini for proper signal handling
 RUN apk add --no-cache tini
 
+# Set working directory
 WORKDIR /usr/src/app
 
-COPY ./package.json .
+# Copy package.json and install dependencies
+COPY package.json ./
+RUN npm install . && npm cache clean --force
 
-EXPOSE 3000 80
+# ✅ Copy the rest of your app (this was missing)
+COPY . .
 
-RUN npm install . \
-    && npm cache clean --force
+# Expose ports (depends on your app)
+EXPOSE 3000
 
-CMD ["/sbin/tini","-- node","./bin/www"]
+# Run your app with tini
+CMD ["/sbin/tini", "--", "node", "./bin/www"]
