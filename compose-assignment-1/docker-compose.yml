@@ -1,0 +1,24 @@
+services:
+  drupal:
+    image: drupal
+    ports:
+      - "8080:80"
+    volumes:
+      - modules:/var/www/html/modules
+      - profiles:/var/www/html/profiles
+      - themes:/var/www/html/themes
+      - sites:/var/www/html/sites
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=example
+
+volumes:
+  modules: 
+    name: modules-data
+  profiles:
+    name: profiles-data
+  themes:
+    name: themes-data
+  sites:
+    name: sites-data
