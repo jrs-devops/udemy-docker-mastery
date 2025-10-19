@@ -1,4 +1,4 @@
-FROM drupal:9
+FROM drupal:11
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

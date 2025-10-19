@@ -20,10 +20,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN apt-get update && apt-get install -y dos2unix && \
-    dos2unix docker-entrypoint.sh && \
-    chmod +x docker-entrypoint.sh
-
 # This app requires persistant data, so lets create a volume statment for `/app/data`.
 
 VOLUME [ "/app/data" ]
